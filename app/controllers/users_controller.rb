@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+before_filter :require_user, except: [:create, :new]
+
+	def require_user
+		redirect_to log_in_path unless current_user
+	end
 
 	def new
 		@user = User.new
@@ -22,7 +27,7 @@ class UsersController < ApplicationController
 
 	def index
 		if session[:user_id] != nil
-			@user = User.all
+			@users = User.all
 		else
 			redirect_to log_in_path
 		end
@@ -46,11 +51,7 @@ class UsersController < ApplicationController
 	def destroy
 		@user = User.find(params[:id])
 		@user.destroy
-		redirect_to users_path
-	end
-
-	def user_params
-		params.require(:user).permit(:email, :password, :password_confirmation)
+		redirect_to log_in_path
 	end
 
 end
