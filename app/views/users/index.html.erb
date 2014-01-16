@@ -1,0 +1,21 @@
+<h1>All Users</h1>
+
+<table border="1">
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>E-mail</th>
+    <th colspan="2"> Action</th>
+  </tr>
+ 
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= user.email %></td>
+      <td><%= link_to 'Show', user %></td>
+      <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    </tr>
+  <% end %>
+</table>
+
