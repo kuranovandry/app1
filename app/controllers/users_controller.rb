@@ -25,11 +25,8 @@ class UsersController < ApplicationController
 	end
 
 	def index
-		if session[:user_id] != nil
-			@users = User.all
-		else
-			redirect_to log_in_path
-		end
+		redirect_to log_in_path and return unless session[:user_id]
+		@users = User.all
 	end
 
 	def edit
