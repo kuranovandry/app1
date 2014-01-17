@@ -40,9 +40,10 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 
 		if @user.update_attributes(params[:user])
-			flash.now.alert = "Successfully updated profile."
+			flash.notice = "Successfully updated profile."
 			redirect_to @user
 		else
+			flash.now.alert = "Can not update profile."
 			render 'edit'
 		end
 	end
