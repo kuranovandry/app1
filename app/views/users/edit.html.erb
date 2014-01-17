@@ -36,18 +36,12 @@
   <%= f.password_field :password %>
 </p>
 
-<% f.fields_for :questions do |builder| %>
-<p>
-  <%= builder.label :content, "Question" %><br />
-  <%= builder.text_area :content, :rows => 3 %>
-</p>
-
-
 <p>
   <%= f.submit %>
 </p>
 
 <% end %>
+
 
 <%= link_to 'Back', users_path %>
 <%= link_to 'Destroy', user_path(@user),

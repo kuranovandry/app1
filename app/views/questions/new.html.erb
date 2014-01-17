@@ -1,14 +1,15 @@
-<% form_for @user_id do |f| %>
-  <%= f.error_messages %>
+<%= form_for @question do |f| %>
   <p>
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
   </p>
-  <% f.fields_for :questions do |builder| %>
+ 
   <p>
-    <%= builder.label :xt, "Question" %><br />
-    <%= builder.text_area :xt, :rows => 3 %>
+    <%= f.label :Text %><br>
+    <%= f.text_area :xt %>
   </p>
-  <% end %>
-  <p><%= f.submit "Submit" %></p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
 <% end %>
