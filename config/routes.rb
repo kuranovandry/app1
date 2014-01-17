@@ -1,5 +1,9 @@
 App1::Application.routes.draw do
 
+  get "answers/index"
+
+  get "questions/index"
+
 get "autologin/login"
 
 get "log_out" => "sessions#destroy", :as => "log_out"
@@ -10,5 +14,5 @@ get "sign_up" => "users#new", :as => "sign_up"
 root to: "users#index"
 resources :sessions
 resources :users
-resources :autologin
+resources :questions
 end

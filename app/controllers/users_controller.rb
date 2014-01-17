@@ -1,11 +1,9 @@
 class UsersController < ApplicationController
 
-before_filter :require_user, except: [:create, :new]
-
-	def require_user
-		redirect_to log_in_path unless current_user
-	end
-
+	before_filter :login?, except: [:create, :new]
+	# has_many :questions, :dependent => :destroy
+	# accepts_nested_attributes_for :questions
+	
 	def new
 		@user = User.new
 	end
@@ -13,8 +11,9 @@ before_filter :require_user, except: [:create, :new]
 	def create
 		@user = User.new(params[:user])
 		if @user.save
+			session[:user_id] = @user.id
 			flash.now.alert = "Registration successful."
-			redirect_to root_url
+			redirect_to users_path
 		else
 			render 'new'
 		end
@@ -41,7 +40,7 @@ before_filter :require_user, except: [:create, :new]
 		@user = User.find(params[:id])
 
 		if @user.update_attributes(params[:user])
-			flash[:notice] = "Successfully updated profile."
+			flash.now.alert = "Successfully updated profile."
 			redirect_to @user
 		else
 			render 'edit'
