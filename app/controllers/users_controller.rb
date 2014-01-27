@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
 
 	before_filter :login?, except: [:create, :new]
+	before_filter :find_user, exept: [:new, :create, :index]
 	# has_many :questions, :dependent => :destroy
 	# accepts_nested_attributes_for :questions
+	
 	
 	def new
 		@user = User.new
@@ -20,22 +22,12 @@ class UsersController < ApplicationController
 
 	end
 
-	def show
-		@user = User.find(params[:id])
-	end
-
 	def index
 		redirect_to log_in_path and return unless session[:user_id]
 		@users = User.all
 	end
 
-	def edit
-		@user = User.find(params[:id])
-	end
-
 	def update
-		@user = User.find(params[:id])
-
 		if @user.update_attributes(params[:user])
 			flash.notice = "Successfully updated profile."
 			redirect_to @user
@@ -46,9 +38,14 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		@user = User.find(params[:id])
 		@user.destroy
 		redirect_to log_in_path
+	end
+	
+	private
+	
+	def find_user
+		@user = User.find(params[:id])
 	end
 
 end
