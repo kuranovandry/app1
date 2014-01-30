@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
 
-	before_filter :login?, except: [:create, :new]
-	before_filter :find_user, exept: [:new, :create, :index]
+	before_filter :login, except: [:create, :new]
+	before_filter :find_user, except: [:new, :create, :index]
 	# has_many :questions, :dependent => :destroy
 	# accepts_nested_attributes_for :questions
 	
 	
 	def new
 		@user = User.new
+
 	end
 
 	def create
@@ -15,7 +16,10 @@ class UsersController < ApplicationController
 		if @user.save
 			session[:user_id] = @user.id
 			flash.now.alert = "Registration successful."
-			redirect_to users_path
+				respond_to do |format|
+    				format.html { redirect_to users_path(@user) }
+    				format.js
+  				end
 		else
 			render 'new'
 		end
@@ -30,7 +34,11 @@ class UsersController < ApplicationController
 	def update
 		if @user.update_attributes(params[:user])
 			flash.notice = "Successfully updated profile."
-			redirect_to @user
+#			respond_to do |format|
+#    			format.html { redirect_to user_path(@user) }
+ #   			format.js
+#  			end
+          redirect_to user_path(@user)
 		else
 			flash.now.alert = "Can not update profile."
 			render 'edit'

@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    skip_before_filter :login?
+    skip_before_filter :login
 
     def new
         session[:user_id] = nil

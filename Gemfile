@@ -26,6 +26,7 @@ gem 'jquery-rails'
 gem 'less'
 gem "less-rails"
 gem 'therubyracer'
+gem 'pry'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
