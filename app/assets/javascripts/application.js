@@ -13,3 +13,23 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+// $('.open_popup').click(function() {
+//                 var popup_id = $('#' + $(this).attr("rel"));
+//                 $(popup_id).show();
+//                 $('.overlay').show();
+//         })
+//         $('.popup .close, .overlay').click(function() {
+//                 $('.overlay, .popup').hide();
+//         })
+
+$(document).ready(function(){
+  $('.open_popup').click(function() {
+    var popup_id = $('#' + $(this).attr("rel"));
+    $(popup_id).show();
+    $('.overlay').show();
+  })
+  $('.popup .close, .overlay').click(function() {
+    $('.overlay, .popup').hide();
+  })
+});
