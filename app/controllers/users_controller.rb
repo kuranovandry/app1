@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 	def edit
 		respond_to do |format|
 			format.html
-			format.js
+			format.js 
 		end
 	end
 
@@ -45,8 +45,8 @@ class UsersController < ApplicationController
 		if @user.update_attributes(params[:user])
 			flash.notice = "Successfully updated profile."
 			respond_to do |format|
-    			format.html { redirect_to user_path(@user) }
-   				format.js
+    			format.html { redirect_to users_path }
+   				format.js { redirect_to users_path }
   			end
 		else
 			flash.now.alert = "Can not update profile."
