@@ -9,25 +9,7 @@
     <th colspan="3"> <center>Action</center></th>
   </tr>
  
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user.first_namer %></td>
-      <td><%= user.last_name %></td>
-      <td><%= user.email %></td>    
-      <td><%= link_to 'Show', user %></td>
-      <td><%= link_to 'Edit', edit_user_path(user) %>
-      <h2><span class="open_popup" rel="popup1"> lol </span></h2>
-
-<div class="overlay"></div>
-
-<div class="popup" id="popup1">
-
-        <span class="close">X</span>
-
-        <%= render partial: "form", object: @user %>
-</div></td>
-      <td><%= link_to 'Question', new_question_path %></td>
-    </tr>
-  <% end %>
+  
+  <%= render @users %>
 </table>
 
