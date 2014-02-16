@@ -11,7 +11,9 @@ class User < ActiveRecord::Base
   validates :first_namer, presence: true, length: { minimum: 4 }
   validates :last_name, presence: true, length: { minimum: 4 } 
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i                
-  validates :password, presence: true, length: { minimum: 4 }   
+  validates :password, presence: true, length: { minimum: 4 }
+
+  scope :serch_by, ->(params) { where("users.first_namer LIKE :search OR users.last_name LIKE :search", search: "%#{params}%") if params.present? }  
 
 
   def self.authenticate(email, password)
