@@ -1,3 +1,6 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
     <tr id="user_<%= user.id %>">
       <td><%= user.first_namer %></td>
       <td><%= user.last_name %></td>
@@ -10,6 +13,4 @@
       <span class="close">X</span>
       </div>
       </td>
-      <td><%= link_to 'Question', new_question_path %></td>
     </tr>
-d

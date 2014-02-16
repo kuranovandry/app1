@@ -29,4 +29,17 @@ class User < ActiveRecord::Base
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
   end
+
+   def full_name
+    "#{first_namer} #{last_name}"
+  end
+
+def self.search(search)
+  if search
+    where('name LIKE ?', "%#{search}%")
+  else
+    scoped
+  end
+end
+  
 end
