@@ -9,6 +9,13 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'slim'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'twitter-bootstrap-rails'
+gem 'jquery-rails'
+gem 'less'
+gem "less-rails"
+gem 'therubyracer'
+gem 'pry'
+gem 'jquery-ui-rails'
+gem 'acts_as_list'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -21,12 +28,6 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-gem 'jquery-rails'
-gem 'less'
-gem "less-rails"
-gem 'therubyracer'
-gem 'pry'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -12,16 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require_tree .
-
-// $('.open_popup').click(function() {
-//                 var popup_id = $('#' + $(this).attr("rel"));
-//                 $(popup_id).show();
-//                 $('.overlay').show();
-//         })
-//         $('.popup .close, .overlay').click(function() {
-//                 $('.overlay, .popup').hide();
-//         })
 
 $(document).ready(function(){
   $('.open_popup').click(function() {
@@ -32,15 +24,15 @@ $(document).ready(function(){
   $('.popup .close, .overlay').click(function() {
     $('.overlay, .popup').hide();
   })
-  
-  $(function() {
-  $("#products th a, #products .pagination a").live("click", function() {
-    $.getScript(this.href);
-    return false;
-  });
-  $("#products_search input").keyup(function() {
-    $.get($("#products_search").attr("action"), $("#products_search").serialize(), null, "script");
-    return false;
-  });
-});
-});
+
+  $("#sortable").sortable({
+      update: function(event, ui) {
+        var str=$(this).sortable('serialize');
+        console.log(str);
+        $.ajax({
+          url: "#{users_path}",
+          data: str 
+        });
+      }
+    })
+ски});

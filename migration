@@ -1,0 +1,23 @@
+Script started on Tue 18 Feb 2014 01:40:36 PM EET
+]0;meter@meter: ~/work/app1meter@meter:~/work/app1$ script/plugin install git://github.com/rails/acts_as_list.git[C[C[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[C[1P git://github.com/rails/acts_as_list.git[1P git://github.com/rails/acts_as_list.git[1Pgit://github.com/rails/acts_as_list.git[1Pit://github.com/rails/acts_as_list.git[1Pt://github.com/rails/acts_as_list.git[1P://github.com/rails/acts_as_list.git[1P//github.com/rails/acts_as_list.git[C[1Pgithub.com/rails/acts_as_list.git[1Pgithub.com/rails/acts_as_list.git[1Pithub.com/rails/acts_as_list.git[1Pthub.com/rails/acts_as_list.git[1Phub.com/rails/acts_as_list.git[1Pub.com/rails/acts_as_list.git[1Pb.com/rails/acts_as_list.git[1P.com/rails/acts_as_list.git[1Pcom/rails/acts_as_list.git[1Pom/rails/acts_as_list.git[1Pm/rails/acts_as_list.git[1P/rails/acts_as_list.git[1Prails/acts_as_list.git[1Pails/acts_as_list.git[1Pils/acts_as_list.git[1Pls/acts_as_list.git[1Ps/acts_as_list.git[1P/acts_as_list.git[1Pacts_as_list.git[1Pcts_as_list.git[1Pts_as_list.git[1Ps_as_list.git[1P_as_list.git[1Pas_list.git[1Ps_list.git[1P_list.git[1Plist.git[1Pist.git[1Pst.git[1Pt.git[1P.git[1Pgit[1Pit[1Pt[K[K[K[K[K[K[Kкфл[K[K[Ka[Krake db:migrate
+]0;meter@meter: ~/work/app1meter@meter:~/work/app1$ rake db:migrate[K[K[K[K[K[K[Ksetup
+db/development.sqlite3 already exists
+db/test.sqlite3 already exists
+-- create_table("questions", {:force=>true})
+   -> 0.1998s
+-- create_table("users", {:force=>true})
+   -> 0.2079s
+-- initialize_schema_migrations_table()
+   -> 0.0003s
+-- assume_migrated_upto_version(20140217144352, ["/home/meter/work/app1/db/migrate"])
+   -> 0.0003s
+]0;meter@meter: ~/work/app1meter@meter:~/work/app1$ script/plugin install git://github.com/rails/acts_as_list.git[C[1P[1P[1P[1P[1P[1P[1P
+Script started, file is install
+]0;meter@meter: ~/work/app1meter@meter:~/work/app1$ script/plugin install acts_as_list
+bash: script/plugin: No such file or directory
+]0;meter@meter: ~/work/app1meter@meter:~/work/app1$ script/plugin install acts_as_list
+bash: script/plugin: Is a directory
+]0;meter@meter: ~/work/app1meter@meter:~/work/app1$ ruby script/plugin install acts_as_list
+ruby: Is a directory - script/plugin (Errno::EISDIR)
+]0;meter@meter: ~/work/app1meter@meter:~/work/app1$ ^C
+]0;meter@meter: ~/work/app1meter@meter:~/work/app1$ rails generate migration AddPartNumberToProducts part_number:string[C[C[1P:string[1P:string[1P:string[1P:string[1P:string[1P:string[1P:string[1P:string[1P:string[1P:string[1P:stringr:stringa:stringi:stringl:strings:string :stringg:stringe:stringn:stringe:stringr:stringa:stringt:stringe:string :stringm:stringi:stringg:stringr:stringa:stringt:stringi:stringo:stringn:

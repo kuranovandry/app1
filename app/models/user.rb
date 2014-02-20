@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
+  acts_as_list
 
   attr_accessor :password
-  attr_accessible :email, :password, :password_confirmation, :first_namer, :last_name
+  attr_accessible :email, :password, :password_confirmation, :first_namer, :last_name, :position
   before_save :encrypt_password
   
   validates_confirmation_of :password
@@ -35,13 +36,5 @@ class User < ActiveRecord::Base
    def full_name
     "#{first_namer} #{last_name}"
   end
-
-def self.search(search)
-  if search
-    where('name LIKE ?', "%#{search}%")
-  else
-    scoped
-  end
-end
   
 end

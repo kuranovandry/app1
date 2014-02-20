@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-	# before_filter :login, except: [:create, :new]
+	before_filter :login, except: [:create, :new]
 	before_filter :find_user, except: [:new, :create, :index]
 	# has_many :questions, :dependent => :destroy
 	# accepts_nested_attributes_for :questions
@@ -38,7 +38,6 @@ class UsersController < ApplicationController
 
 	def index
 		redirect_to log_in_path and return unless session[:user_id]
-		#@users = User.all
 		@users = User.order("#{sort_column} #{sort_direction}").serch_by(params[:search])
 	end
 
@@ -59,6 +58,13 @@ class UsersController < ApplicationController
 		@user.destroy
 		redirect_to log_in_path
 	end
+
+	def sort
+    params[:user].each_with_index do |id, index|
+      User.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
+  end
 	
 	private
 	
@@ -67,7 +73,7 @@ class UsersController < ApplicationController
 	end
 
 	def sort_column
-    User.column_names.include?(params[:sort]) ? params[:sort] : "users.first_namer"
+    User.column_names.include?(params[:sort]) ? params[:sort] : "first_namer"
   end
   
   def sort_direction

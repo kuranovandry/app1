@@ -1,5 +1,7 @@
 App1::Application.routes.draw do
 
+  get "auto_complate/index"
+
   get "answers/index"
 
   get "questions/index"
@@ -13,6 +15,8 @@ get "sign_up" => "users#new", :as => "sign_up"
 #root :to => "sessions#new"
 root to: "users#index"
 resources :sessions
-resources :users
+resources :users do
+  collection { post :sort }
+end
 resources :questions
 end

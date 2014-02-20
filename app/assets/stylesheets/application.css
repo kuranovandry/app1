@@ -30,3 +30,9 @@
 .pretty th .desc {
   background-image: url(/images/down_arrow.gif);
 }
+
+li .handle {
+  font-size: 12px;
+  cursor: move;
+  color: #777;
+}
