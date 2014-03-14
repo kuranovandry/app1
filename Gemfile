@@ -16,6 +16,11 @@ gem 'therubyracer'
 gem 'pry'
 gem 'jquery-ui-rails'
 gem 'acts_as_list'
+gem 'lazybox', '3.0.0.beta2'
+gem "searchkick"
+gem 'rails3-jquery-autocomplete'
+gem 'will_paginate', '~> 3.0'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,10 +1,12 @@
 class User < ActiveRecord::Base
   acts_as_list
+  searchkick autocomplete: ['first_namer']
 
   attr_accessor :password
   attr_accessible :email, :password, :password_confirmation, :first_namer, :last_name, :position
+
   before_save :encrypt_password
-  
+
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
   validates_presence_of :email
@@ -33,8 +35,8 @@ class User < ActiveRecord::Base
     end
   end
 
-   def full_name
+  def full_name
     "#{first_namer} #{last_name}"
   end
-  
+
 end

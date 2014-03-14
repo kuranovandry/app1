@@ -15,8 +15,18 @@ get "sign_up" => "users#new", :as => "sign_up"
 #root :to => "sessions#new"
 root to: "users#index"
 resources :sessions
+
+# resources :users do
+#     get 'search_on_title', :on => :collection
+#   end
+
 resources :users do
-  collection { post :sort }
+  collection do
+      post :sort 
+      post :import
+      get :autocomplete
+    end
 end
+
 resources :questions
 end

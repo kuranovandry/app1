@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
+//= require lazybox
+//= require autocomplete-rails
 //= require_tree .
 
 $(document).ready(function(){
@@ -27,7 +29,7 @@ $(document).ready(function(){
 
   $("#sortable").sortable({
       update: function(event, ui) {
-        var str=$(this).sortable('serialize');
+        return $.post($(this).data('update-url'), $(this).sortable('serialize'));
         console.log(str);
         $.ajax({
           url: "#{users_path}",
@@ -35,4 +37,26 @@ $(document).ready(function(){
         });
       }
     })
-ски});
+  
+$("#big-search-box").bind("keyup", function() {
+
+  $("#big-search-box").addClass("loading"); // show the spinner
+  var form = $("#live-search-form"); // grab the form wrapping the search bar.
+
+  var url = "/tasks/live_search"; // live_search action.   
+  var formData = form.serialize(); // grab the data in the form   
+  $.get(url, formData, function(html) { // perform an AJAX get
+
+    $("#big-search-box").removeClass("loading"); // hide the spinner
+
+    $("#live-search-results").html(html); // replace the "results" div with the results
+
+  });
+
+}); 
+
+  $.lazybox.settings = { cancelClass: "pure-button", submitClass: 'pure-button pure-button-primary' }
+  $.rails.allowAction = $.lazybox.confirm;
+
+
+});

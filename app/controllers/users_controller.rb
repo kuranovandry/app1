@@ -1,9 +1,7 @@
 class UsersController < ApplicationController
 
 	before_filter :login, except: [:create, :new]
-	before_filter :find_user, except: [:new, :create, :index]
-	# has_many :questions, :dependent => :destroy
-	# accepts_nested_attributes_for :questions
+	before_filter :find_user, except: [:new, :create, :index, :sort, :autocomplete]
 	helper_method :sort_column, :sort_direction
 	
 	def new
@@ -11,13 +9,6 @@ class UsersController < ApplicationController
 		respond_to do |format|
 			format.html
 			format.js
-		end
-	end
-
-	def edit
-		respond_to do |format|
-			format.html
-			format.js 
 		end
 	end
 
@@ -38,7 +29,14 @@ class UsersController < ApplicationController
 
 	def index
 		redirect_to log_in_path and return unless session[:user_id]
-		@users = User.order("#{sort_column} #{sort_direction}").serch_by(params[:search])
+		# @users = User.order("#{sort_column} #{sort_direction}").serch_by(params[:search])
+    if params[:query].present?
+      @users = User.order("#{sort_column} #{sort_direction}").search(params[:query])
+      # @users.paginate(page: params[:page], per_page: 5)
+      # @users = User.search(params[:query], page: params[:page])
+    else
+      @users = User.order("#{sort_column} #{sort_direction}").paginate(page: params[:page], per_page: 5)
+    end
 	end
 
 	def update
@@ -59,21 +57,32 @@ class UsersController < ApplicationController
 		redirect_to log_in_path
 	end
 
-	def sort
-    params[:user].each_with_index do |id, index|
-      User.update_all({position: index+1}, {id: id})
-    end
-    render nothing: true
+  def sort
+      params[:user].each_with_index do |id, index|
+#     user = User.find(id)
+#     user.update_attribute(:position, index) if user
+      User.where(id: id).update_all({position: index+1})
+      end
+  render nothing: true
   end
-	
+
+  def autocomplete
+    render json: User.search(params[:query], autocomplete: true).map(&:first_namer)
+  end
+
+  def live_search
+      @users = User.find_latest params[:q]
+      render :layout => false
+  end
+
 	private
 	
 	def find_user
 		@user = User.find(params[:id])
 	end
 
-	def sort_column
-    User.column_names.include?(params[:sort]) ? params[:sort] : "first_namer"
+  def sort_column
+    params[:sort].present? ? params[:sort] : "position"
   end
   
   def sort_direction

@@ -1,5 +1,11 @@
 module ApplicationHelper
 
+def error_tag(error)
+    unless error.blank?
+      content_tag(:span, error.is_a?(Array) ? error.first : error, class: :error)
+    end
+end
+
 def sortable column, title = nil
     title ||= column.titleize
     sort = column.kind_of?(Array) ? column.join(" #{sort_direction}, ") : column

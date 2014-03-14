@@ -1,1 +1,2 @@
-$("#users").html("<%= escape_javascript(render("users")) %>");
+$("#users").html("<%= j(render('users')) %>");
+Users.sortable();

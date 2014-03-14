@@ -1,15 +1,7 @@
-<%= hidden_field_tag :direction, params[:direction] %>
-<%= hidden_field_tag :sort, params[:sort] %>
-    <tr id="user_<%= user.id %>">
-      <td><%= user.first_namer %></td>
-      <td><%= user.last_name %></td>
-      <td><%= user.email %></td>    
-      <td><%= link_to 'Show', user %></td>
-      <td><%= link_to 'Edit', edit_user_path(user), remote: true %>
-      <h2><span class="open_popup" rel="popup1"></span></h2>
-      <div class="overlay"></div>
-      <div class="popup" id="popup1">
-      <span class="close">X</span>
-      </div>
-      </td>
-    </tr>
+<tr id="user_<%= user.id %>">
+  <td class="handle"><%= user.first_namer %></td>
+  <td><%= user.last_name %></td>
+  <td><%= user.email %></td>    
+  <td><%= link_to 'Show', user %></td>
+  <td><%= link_to 'Edit', edit_user_path(user), remote: true %></td>
+</tr>
