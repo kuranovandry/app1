@@ -9,14 +9,13 @@ class User < ActiveRecord::Base
 
   before_save :encrypt_password
 
-  # validates_confirmation_of :password
-  # validates_presence_of :password, :on => :create
-  # validates_presence_of :email
-  # validates_uniqueness_of :email
-  # validates :first_namer, presence: true, length: { minimum: 4 }
-  # validates :last_name, presence: true, length: { minimum: 4 } 
-  # validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i                
-  # validates :password, presence: true, length: { minimum: 4 }
+   validates_confirmation_of :password
+   validates_presence_of :email
+   validates_uniqueness_of :email
+   validates :first_namer, presence: true, length: { minimum: 4 }
+   validates :last_name, presence: true, length: { minimum: 4 } 
+   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i                
+   validates :password, presence: true, length: { minimum: 4 }, :on => :create
 
   # scope :serch_by, ->(params) { where("users.first_namer LIKE :search OR users.last_name LIKE :search", search: "%#{params}%") if params.present? }  
 
