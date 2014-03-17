@@ -1,0 +1,6 @@
+tr id="user_#{user.id}" 
+  td.handle= user.first_namer
+  td= user.last_name
+  td= user.email
+  td= link_to 'Show', user
+  td= link_to 'Edit', edit_user_path(user), remote: true

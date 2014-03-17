@@ -3,23 +3,9 @@ div style="padding-left: 150px;"
 = hidden_field_tag :direction, params[:direction]
 = hidden_field_tag :sort, params[:sort]
 div style="padding-left: 150px;"
-  = form_tag users_path, class: "form-inline", method: :get do
+  = form_tag users_path, class: "form-inline", method: :get, id: "users_search" do
       = text_field_tag :query, params[:query], class: "form-control", id: "user_search", autocomplete: "off"
       .input-group-btn
-        = submit_tag "Search", class: "btn btn-primary"
-div style="padding-left: 150px; padding-right: 150px;"
-  table.table.table-bordered border="1"
-    thead
-      tr
-        th
-          center= sortable "first_namer", "First Name"
-        th
-          center= sortable "last_name", "Last name"
-        th
-          center= sortable "email", "E-mail"
-        th colspan="3"
-          center Action
-    tbody#sort_users data-update-url=(sort_users_url)
-      - @users.each do |user|
-        = render partial: 'user', locals: { user: user }
-  
+        / = submit_tag "Search", class: "btn btn-primary"
+#users= render 'user'
+

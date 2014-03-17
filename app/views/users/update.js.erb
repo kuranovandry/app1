@@ -1,6 +1,6 @@
 <% if @user.valid? %>
   $.lazybox.close();
-  $('#user_<%= @user.id %>').replaceWith("<%= j(render partial: '   ', locals: { user: @user }) %>");
+  $('#user_<%= @user.id %>').replaceWith("<%= j(render partial: 'tr', locals: { user: @user }) %>");
 <% else %>
   $.lazybox("<%= j(render partial: 'form') %>");
 <% end %>

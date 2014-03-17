@@ -29,11 +29,8 @@ class UsersController < ApplicationController
 
 	def index
 		redirect_to log_in_path and return unless session[:user_id]
-		# @users = User.order("#{sort_column} #{sort_direction}").serch_by(params[:search])
     if params[:query].present?
-      @users = User.order("#{sort_column} #{sort_direction}").search(params[:query])
-      # @users.paginate(page: params[:page], per_page: 5)
-      # @users = User.search(params[:query], page: params[:page])
+      @users = User.paginate(page: params[:page], per_page: 5).order("#{sort_column} #{sort_direction}").search(params[:query])
     else
       @users = User.order("#{sort_column} #{sort_direction}").paginate(page: params[:page], per_page: 5)
     end
@@ -42,10 +39,6 @@ class UsersController < ApplicationController
 	def update
 		if @user.update_attributes(params[:user])
 			flash.notice = "Successfully updated profile."
-			respond_to do |format|
-    			format.html { redirect_to users_path }
-   				format.js { redirect_to users_path }
-  			end
 		else
 			flash.now.alert = "Can not update profile."
 			render 'edit'
@@ -58,21 +51,16 @@ class UsersController < ApplicationController
 	end
 
   def sort
-      params[:user].each_with_index do |id, index|
+    params[:user].each_with_index do |id, index|
 #     user = User.find(id)
 #     user.update_attribute(:position, index) if user
       User.where(id: id).update_all({position: index+1})
-      end
-  render nothing: true
+    end
+    render nothing: true
   end
 
   def autocomplete
-    render json: User.search(params[:query], autocomplete: true).map(&:first_namer)
-  end
-
-  def live_search
-      @users = User.find_latest params[:q]
-      render :layout => false
+    render json: User.search(params[:query], autocomplete: true).map(&:full_name)
   end
 
 	private

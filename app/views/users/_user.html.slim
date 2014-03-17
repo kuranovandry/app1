@@ -1,0 +1,16 @@
+div style="padding-left: 150px; padding-right: 150px;"
+  table.table.table-bordered border="1"
+    thead
+      tr
+        th
+          center= sortable "first_namer", "First Name"
+        th
+          center= sortable "last_name", "Last name"
+        th
+          center= sortable "email", "E-mail"
+        th colspan="3"
+          center Action
+    tbody
+    - @users.each do |user|
+      =render partial: 'tr', locals: { user: user }
+= will_paginate @user
