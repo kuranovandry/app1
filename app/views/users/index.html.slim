@@ -3,9 +3,10 @@ div style="padding-left: 150px;"
 = hidden_field_tag :direction, params[:direction]
 = hidden_field_tag :sort, params[:sort]
 div style="padding-left: 150px;"
+
   = form_tag users_path, class: "form-inline", method: :get, id: "users_search" do
-      = text_field_tag :query, params[:query], class: "form-control", id: "user_search", autocomplete: "off"
+      = text_field_tag :query, params[:query], {:id => "search", :url => auto_complate_index_path(:js), :method => :get}
       .input-group-btn
-        / = submit_tag "Search", class: "btn btn-primary"
+      
 #users= render 'user'
 

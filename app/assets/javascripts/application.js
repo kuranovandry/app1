@@ -37,8 +37,36 @@ $(function() {
     $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
     return false;
   });
+
+
+$(function() {
+
+        $( "#search" ).autocomplete({
+            source: "auto_complate#index.js",
+            minLength: 1
+        });
+    });
 });
 
-$.lazybox.settings = { cancelClass: "pure-button", submitClass: 'pure-button pure-button-primary' }
+$timeout = void 0; //устанавливаем таймер для срабатывание запроса, чтоб неспамить
+  $("body").on("input", "#field", function(e) {
+    clearTimeout($timeout); // сбрасуем таймер при новом вводе символа
+    $timeout = setTimeout(function() { //запускаем новый таймер
+      if ($("#field").val().length > 1) {
+        $.ajax({
+          url: $('#field').data('search-url'),// прописать урл запроса на поле ввода в дата атрибут
+          data: "search=" + $("#field").val(), // в контроллер прийдет как params[:search]
+          dataType: 'JSON',
+          success: function(data) {
+            $("#field").autocomplete({
+                source: data // в data должен быть масив с контроллера
+            });
+          }
+        });
+      }
+    }, 700);
+  });
+
+$.lazybox.settings = { cancelClasskey: "value",  "pure-button", submitClass: 'pure-button pure-button-primary' }
 $.rails.allowAction = $.lazybox.confirm;
 

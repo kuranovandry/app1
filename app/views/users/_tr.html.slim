@@ -2,5 +2,7 @@ tr id="user_#{user.id}"
   td.handle= user.first_namer
   td= user.last_name
   td= user.email
-  td= link_to 'Show', user
   td= link_to 'Edit', edit_user_path(user), remote: true
+  td 
+    - unless current_user == user
+        = link_to 'Delete', user_path(user), method: :delete,  data: { confirm: 'You sure?' }

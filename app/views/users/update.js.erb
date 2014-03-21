@@ -4,12 +4,3 @@
 <% else %>
   $.lazybox("<%= j(render partial: 'form') %>");
 <% end %>
-
-
-
-// - if @user.save
-//   | $("#user_#{@user.id}").replaceWith("#{j(render partial: 'user')}");
-//   | $('#popup1').hide();
-// - else
-//   | $('#popup1').show();
-//   | $('#popup1').html("#{j( render partial: 'form' )}");

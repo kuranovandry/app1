@@ -17,10 +17,6 @@ class UsersController < ApplicationController
 		if @user.save
 			session[:user_id] = @user.id
 			flash.now.alert = "Registration successful."
-				respond_to do |format|
-    				format.html { redirect_to users_path(@user) }
-    				format.js
-  				end
 		else
 			render 'new'
 		end
@@ -37,33 +33,26 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		if @user.update_attributes(params[:user])
-			flash.notice = "Successfully updated profile."
-		else
-			flash.now.alert = "Can not update profile."
-			render 'edit'
-		end
+   render :edit unless @user.update_attributes(params[:user])
 	end
 
 	def destroy
-		@user.destroy
-		redirect_to log_in_path
+		redirect_to session_path, notice: "You do not have permition to delete this user" and return  if current_user != @user
 	end
 
   def sort
     params[:user].each_with_index do |id, index|
-#     user = User.find(id)
-#     user.update_attribute(:position, index) if user
       User.where(id: id).update_all({position: index+1})
     end
     render nothing: true
   end
-
+  
   def autocomplete
-    render json: User.search(params[:query], autocomplete: true).map(&:full_name)
+    # binding.pry
+    render json: User.search(params[:query], autocomplete: true).map(&:full_name) if params[:query].size > 2
   end
 
-	private
+private
 	
 	def find_user
 		@user = User.find(params[:id])
